@@ -1,0 +1,539 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>A Special Question ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* =========================
+       FIRST SCREEN
+    ========================= */
+
+    #questionPage {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+    }
+
+    .question-box {
+      background: white;
+      padding: 45px 30px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .question-box h1 {
+      color: #e91e63;
+      font-size: 36px;
+      margin: 0 0 35px;
+    }
+
+    #yesButton {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #yesButton:hover {
+      transform: scale(1.1);
+    }
+
+    #noButton {
+      position: fixed;
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      transition: left 0.12s ease, top 0.12s ease;
+    }
+
+
+    /* =========================
+       SECOND SCREEN
+    ========================= */
+
+    #celebrationPage {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      background:
+        radial-gradient(circle at top, #fff0f6, #ffc1d9 45%, #ff8fab);
+    }
+
+    .celebration-content {
+      position: relative;
+      z-index: 5;
+      padding: 30px;
+    }
+
+    .celebration-content h1 {
+      font-size: 48px;
+      color: #d81b60;
+      margin: 10px 0;
+    }
+
+    .celebration-content h2 {
+      font-size: 28px;
+      color: #ad1457;
+      margin: 15px 0;
+    }
+
+    .ring {
+      font-size: 120px;
+      animation: ringBounce 1.2s infinite;
+    }
+
+    .happy-emojis {
+      font-size: 55px;
+      margin: 20px 0;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    .flowers {
+      font-size: 60px;
+      margin: 15px 0;
+    }
+
+    .love-message {
+      color: #880e4f;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes ringBounce {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+
+    /* =========================
+       FLOATING HEARTS
+    ========================= */
+
+    .heart {
+      position: absolute;
+      bottom: -60px;
+      font-size: 30px;
+      animation: heartFloat 5s linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes heartFloat {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================
+       CONFETTI
+    ========================= */
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 18px;
+      top: -30px;
+      animation: fall 4s linear forwards;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+
+      .question-box h1 {
+        font-size: 30px;
+      }
+
+      .celebration-content h1 {
+        font-size: 38px;
+      }
+
+      .celebration-content h2 {
+        font-size: 24px;
+      }
+
+      .ring {
+        font-size: 90px;
+      }
+
+      .happy-emojis {
+        font-size: 42px;
+      }
+
+      .flowers {
+        font-size: 45px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       PAGE 1
+  ========================= -->
+
+  <div id="questionPage">
+
+    <div class="question-box">
+
+      <h1>
+        Will you marry me? 💍❤️
+      </h1>
+
+      <button id="yesButton" onclick="sayYes()">
+        Yes ❤️
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- NO BUTTON -->
+  <button id="noButton">
+    No 😭
+  </button>
+
+
+  <!-- =========================
+       PAGE 2
+  ========================= -->
+
+  <div id="celebrationPage">
+
+    <div class="celebration-content">
+
+      <div class="flowers">
+        🌸 💐 🌷 🌹
+      </div>
+
+      <div class="ring">
+        💍
+      </div>
+
+      <h1>
+        YAAAAAY! 🥰❤️
+      </h1>
+
+      <h2>
+        I KNEW YOU'D SAY YES! 🎉
+      </h2>
+
+      <div class="happy-emojis">
+        🥰 💕 🎉 😍 ❤️
+      </div>
+
+      <div class="flowers">
+        🌹 🌸 💐 🌷 🌺
+      </div>
+
+      <p class="love-message">
+        This is the beginning of something beautiful. ❤️
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const noButton = document.getElementById("noButton");
+    const questionPage = document.getElementById("questionPage");
+    const celebrationPage = document.getElementById("celebrationPage");
+
+
+    /* =========================
+       MAKE NO BUTTON RUN
+    ========================= */
+
+    function moveNoButton(mouseX, mouseY) {
+
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+
+      const maxX = window.innerWidth - buttonWidth - 10;
+      const maxY = window.innerHeight - buttonHeight - 10;
+
+      let x;
+      let y;
+
+      do {
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+
+      } while (
+        mouseX !== undefined &&
+        Math.hypot(
+          mouseX - (x + buttonWidth / 2),
+          mouseY - (y + buttonHeight / 2)
+        ) < 150
+      );
+
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+
+
+    /* Mouse gets close */
+
+    document.addEventListener("mousemove", function(event) {
+
+      if (noButton.style.display === "none") {
+        return;
+      }
+
+      const rect = noButton.getBoundingClientRect();
+
+      const distance = Math.hypot(
+        event.clientX - (rect.left + rect.width / 2),
+        event.clientY - (rect.top + rect.height / 2)
+      );
+
+      if (distance < 150) {
+        moveNoButton(event.clientX, event.clientY);
+      }
+
+    });
+
+
+    /* Touch */
+
+    noButton.addEventListener("touchstart", function(event) {
+
+      event.preventDefault();
+
+      moveNoButton(
+        event.touches[0].clientX,
+        event.touches[0].clientY
+      );
+
+    });
+
+
+    /* Click */
+
+    noButton.addEventListener("click", function(event) {
+
+      event.preventDefault();
+
+      moveNoButton();
+
+    });
+
+
+    /* Put No somewhere random at start */
+
+    window.addEventListener("load", function() {
+
+      moveNoButton();
+
+    });
+
+
+    /* =========================
+       YES BUTTON
+    ========================= */
+
+    function sayYes() {
+
+      /*
+        COMPLETELY REMOVE PAGE 1
+      */
+
+      questionPage.style.display = "none";
+      noButton.style.display = "none";
+
+
+      /*
+        SHOW COMPLETELY DIFFERENT PAGE
+      */
+
+      celebrationPage.style.display = "flex";
+
+
+      /*
+        Start celebration
+      */
+
+      createHearts();
+      createConfetti();
+
+    }
+
+
+    /* =========================
+       HEARTS
+    ========================= */
+
+    function createHearts() {
+
+      const hearts = [
+        "❤️",
+        "💕",
+        "💖",
+        "💗",
+        "💓",
+        "💘"
+      ];
+
+      for (let i = 0; i < 30; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerText =
+          hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+          Math.random() * 100 + "vw";
+
+        heart.style.animationDuration =
+          3 + Math.random() * 4 + "s";
+
+        heart.style.animationDelay =
+          Math.random() * 3 + "s";
+
+        document
+          .getElementById("celebrationPage")
+          .appendChild(heart);
+
+      }
+
+    }
+
+
+    /* =========================
+       CONFETTI
+    ========================= */
+
+    function createConfetti() {
+
+      const colors = [
+        "#ff4081",
+        "#e91e63",
+        "#ffeb3b",
+        "#4caf50",
+        "#2196f3",
+        "#9c27b0"
+      ];
+
+      for (let i = 0; i < 100; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+          Math.random() * 100 + "vw";
+
+        piece.style.background =
+          colors[Math.floor(Math.random() * colors.length)];
+
+        piece.style.animationDuration =
+          2 + Math.random() * 3 + "s";
+
+        piece.style.animationDelay =
+          Math.random() * 2 + "s";
+
+        document
+          .getElementById("celebrationPage")
+          .appendChild(piece);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
